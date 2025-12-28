@@ -1,0 +1,25 @@
+body {
+    background-color: hsl(0, 0%, 7%);
+    font-family: "Sora", serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+}
+
+.record {
+    display: flex;
+    gap: 10px;
+}
+
+.record-text {
+    color: hsl(240, 1%, 59%);
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.record-text span {
+    color: white;
+}
