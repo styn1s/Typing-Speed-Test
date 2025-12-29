@@ -1,3 +1,12 @@
+:root {
+    --text: hsl(240, 1%, 59%);
+    --white: hsl(0, 0%, 100%);
+    --red: hsl(354, 63%, 57%);
+    --yellow: hsl(49, 85%, 70%);
+    --blue: hsl(210, 100%, 65%);
+    --line: hsl(0, 0%, 15%);
+}
+
 body {
     background-color: hsl(0, 0%, 7%);
     font-family: "Sora", serif;
@@ -6,7 +15,7 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 30px;
+    margin: 30px 90px;
 }
 
 .record {
@@ -15,11 +24,87 @@ body {
 }
 
 .record-text {
-    color: hsl(240, 1%, 59%);
+    color: var(--text);
     font-weight: 300;
     font-size: 16px;
 }
 
 .record-text span {
-    color: white;
+    color: var(--white);
+}
+
+.typing-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 90px
+}
+
+.typing-info__list {
+    display: flex;
+    color: var(--text);
+    list-style-type: none;
+    padding: 0;
+}
+
+.typing-info__item {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0;
+    border-right: 1px solid var(--line);
+}
+
+.typing-info__item:first-child {
+    padding-left: 0;
+}
+
+.typing-info__item:last-child {
+    border-right: none;
+}
+
+.typing-info__item span {
+    margin-left: 10px;
+    font: bold 24px "Sora", serif;
+    color: var(--white);
+}
+
+.level-mode-info {
+    display: flex;
+}
+
+.level-info__list,
+.mode-info__list {
+    display: flex;
+    color: var(--text);
+    list-style-type: none;
+    padding: 0;
+}
+
+.level-info__list {
+    gap: 7px;
+    padding-right: 20px;
+    border-right: 1px solid var(--line);
+}
+
+.mode-info__list {
+    gap: 7px;
+}
+
+.level-info__item a,
+.mode-info__item a {
+    padding: 10px;
+    border: 1px solid var(--text);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.level-info__item a:hover,
+.mode-info__item a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.mode-info__list {
+    padding-left: 20px;
 }
