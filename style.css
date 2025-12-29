@@ -4,10 +4,13 @@
     --red: hsl(354, 63%, 57%);
     --yellow: hsl(49, 85%, 70%);
     --blue: hsl(210, 100%, 65%);
+    --dark-blue: hsl(214, 100%, 55%);
     --line: hsl(0, 0%, 15%);
 }
 
 body {
+    position: relative;
+    margin: 0;
     background-color: hsl(0, 0%, 7%);
     font-family: "Sora", serif;
 }
@@ -37,7 +40,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 50px 90px
+    margin: 50px 90px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
 }
 
 .typing-info__list {
@@ -105,6 +110,41 @@ body {
     border-color: var(--blue);
 }
 
+.level-info__item a.active,
+.mode-info__item a.active {
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
 .mode-info__list {
     padding-left: 20px;
+}
+
+#content {
+    margin: 0 90px;
+    color: var(--text);
+    font-size: 2rem;
+    filter: blur(5px);
+}
+
+.start-info {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.start-info__button {
+    text-decoration: none;
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: var(--dark-blue);
+}
+
+.start-info__label {
+    color: var(--white);
 }

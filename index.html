@@ -30,9 +30,9 @@
             <div class="level-mode-info">
                 <ul class="level-info__list">
                     <li>Difficulty:</li>
-                    <li class="level-info__item"><a href="#">Easy</a></li>
-                    <li class="level-info__item"><a href="#">Medium</a></li>
-                    <li class="level-info__item"><a href="#">Hard</a></li>
+                    <li class="level-info__item"><a onclick="renderLevel('easy')" href="#">Easy</a></li>
+                    <li class="level-info__item"><a onclick="renderLevel('medium')"href="#">Medium</a></li>
+                    <li class="level-info__item"><a onclick="renderLevel('hard')"href="#">Hard</a></li>
                 </ul>
                 <ul class="mode-info__list">
                     <li>Mode: </li>
@@ -43,7 +43,16 @@
             
         </div>
 
+        <div id="content"></div>
+
+        <div class="start-info">
+            <a href="#" class="start-info__button">Start typing test</a>
+            <h3 class="start-info__label">Or click the text and start typing</h3>
+        </div>
+
     </main>
+
+    <script src="script.js"></script>
     
 </body>
 </html>
