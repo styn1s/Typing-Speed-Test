@@ -1,58 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
     <title>Typing Speed Test</title>
-</head>
-<body>
-
-    <header class="header">
-        <div class="logo">
-            <img src="/assets/images/logo-large.svg" alt="Logo">
-        </div>
-        <div class="record">
-            <img src="/assets/images/icon-personal-best.svg" alt="Prize">
-            <h2 class="record-text">Personal best: <span>92 WPM</span></h2>
-        </div>
+  </head>
+  <body>
+    <header id="header">
+      <div id="logo">
+        <img src="/assets/images/logo-large.svg" alt="Logo" />
+      </div>
+      <div id="record">
+        <img src="/assets/images/icon-personal-best.svg" alt="Prize" />
+        <h2 id="record-text">Personal best: <span>92 WPM</span></h2>
+      </div>
     </header>
 
-    <main class="main">
-        <div class="typing-info">
-            <ul class="typing-info__list">
-                <li class="typing-info__item">WPM: <span class="wpm">0</span></li>
-                <li class="typing-info__item">Accuracy: <span class="accuracy">100%</span></li>
-                <li class="typing-info__item">Time: <span class="time">0:60</span></li>
-            </ul>
+    <main id="main">
+      <div id="typing-info">
+        <ul id="typing-info__list">
+          <li class="typing-info__item">WPM: <span id="wpm">0</span></li>
+          <li class="typing-info__item">
+            Accuracy: <span id="accuracy">100%</span>
+          </li>
+          <li class="typing-info__item">Time: <span id="time">0:60</span></li>
+        </ul>
 
-            <div class="level-mode-info">
-                <ul class="level-info__list">
-                    <li>Difficulty:</li>
-                    <li class="level-info__item"><a onclick="renderLevel('easy')" href="#">Easy</a></li>
-                    <li class="level-info__item"><a onclick="renderLevel('medium')"href="#">Medium</a></li>
-                    <li class="level-info__item"><a onclick="renderLevel('hard')"href="#">Hard</a></li>
-                </ul>
-                <ul class="mode-info__list">
-                    <li>Mode: </li>
-                    <li class="mode-info__item"><a href="#">Timed (60s)</a></li>
-                    <li class="mode-info__item"><a href="#">Passage</a></li>
-                </ul>
-            </div>
-            
+        <div id="level-mode-info">
+          <ul id="level-info__list">
+            <li>Difficulty:</li>
+            <li class="level-info__item">
+              <a onclick="renderLevel('easy')" href="#">Easy</a>
+            </li>
+            <li class="level-info__item">
+              <a onclick="renderLevel('medium')" href="#">Medium</a>
+            </li>
+            <li class="level-info__item">
+              <a onclick="renderLevel('hard')" href="#">Hard</a>
+            </li>
+          </ul>
+          <ul id="mode-info__list">
+            <li>Mode:</li>
+            <li class="mode-info__item"><a href="#">Timed (60s)</a></li>
+            <li class="mode-info__item"><a href="#">Passage</a></li>
+          </ul>
         </div>
+      </div>
 
-        <div id="content"></div>
+      <div id="content" onclick="startTest()"></div>
 
-        <div class="start-info">
-            <a href="#" class="start-info__button">Start typing test</a>
-            <h3 class="start-info__label">Or click the text and start typing</h3>
-        </div>
-
+      <div id="start-info">
+        <a href="#" id="start-info__button" onclick="startTest()"
+          >Start typing test</a
+        >
+        <h3 id="start-info__label">Or click the text and start typing</h3>
+      </div>
     </main>
 
     <script src="script.js"></script>
-    
-</body>
+  </body>
 </html>

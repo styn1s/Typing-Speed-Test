@@ -15,28 +15,28 @@ body {
     font-family: "Sora", serif;
 }
 
-.header {
+#header {
     display: flex;
     justify-content: space-between;
     margin: 30px 90px;
 }
 
-.record {
+#record {
     display: flex;
     gap: 10px;
 }
 
-.record-text {
+#record-text {
     color: var(--text);
     font-weight: 300;
     font-size: 16px;
 }
 
-.record-text span {
+#record-text span {
     color: var(--white);
 }
 
-.typing-info {
+#typing-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,7 +45,7 @@ body {
     padding-bottom: 10px;
 }
 
-.typing-info__list {
+#typing-info__list {
     display: flex;
     color: var(--text);
     list-style-type: none;
@@ -73,25 +73,25 @@ body {
     color: var(--white);
 }
 
-.level-mode-info {
+#level-mode-info {
     display: flex;
 }
 
-.level-info__list,
-.mode-info__list {
+#level-info__list,
+#mode-info__list {
     display: flex;
     color: var(--text);
     list-style-type: none;
     padding: 0;
 }
 
-.level-info__list {
+#level-info__list {
     gap: 7px;
     padding-right: 20px;
     border-right: 1px solid var(--line);
 }
 
-.mode-info__list {
+#mode-info__list {
     gap: 7px;
 }
 
@@ -127,7 +127,7 @@ body {
     filter: blur(5px);
 }
 
-.start-info {
+#start-info {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -137,7 +137,7 @@ body {
     transform: translate(-50%);
 }
 
-.start-info__button {
+#start-info__button {
     text-decoration: none;
     color: var(--white);
     padding: 10px 15px;
@@ -145,6 +145,6 @@ body {
     background-color: var(--dark-blue);
 }
 
-.start-info__label {
+#start-info__label {
     color: var(--white);
 }
