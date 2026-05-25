@@ -15,6 +15,14 @@ body {
     font-family: "Sora", serif;
 }
 
+.correct {
+    color: hsl(140, 63%, 57%);
+}
+
+.incorrect {
+    color: hsl(354, 63%, 57%);
+}
+
 #header {
     display: flex;
     justify-content: space-between;
@@ -30,6 +38,18 @@ body {
     color: var(--text);
     font-weight: 300;
     font-size: 16px;
+}
+
+#prize-icon {
+    width: 20px;
+}
+
+#accuracy {
+    color: hsl(354, 63%, 57%);
+}
+
+#time {
+    color: hsl(49, 85%, 70%);
 }
 
 #record-text span {
@@ -125,6 +145,11 @@ body {
     color: var(--text);
     font-size: 2rem;
     filter: blur(5px);
+}
+
+#user-input {
+    margin: 0 90px;
+    width: 80%;
 }
 
 #start-info {

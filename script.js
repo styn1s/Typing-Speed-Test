@@ -1,5 +1,32 @@
+let isTextClicked = false;
+let isTimeClicked = false;
+let index = 0;
+let textSymbols;
+let receivedText;
+
 const levelLinks = document.querySelectorAll(".level-info__item a");
 const modeLinks = document.querySelectorAll(".mode-info__item a");
+const timeBtn = document.getElementById("time-btn");
+
+document.addEventListener("keydown", function(event) {
+  if (event.key.length > 1) return;
+
+  if (textSymbols && index < textSymbols.length) {
+    const letter = textSymbols[index];
+
+    if (letter == event.key) {
+      console.log(event.key);
+    } else {
+      console.log("NO");
+    }
+    updateDisplay(letter);
+    index++;
+  }
+})
+
+timeBtn.addEventListener("click", () => {
+  isTimeClicked = true;
+});
 
 levelLinks.forEach((link) => {
   link.addEventListener("click", function (e) {
@@ -32,6 +59,9 @@ async function renderLevel(level) {
 
     const text = getRandomText(level, data);
     container.innerHTML = text;
+    textSymbols = text.split('');
+    receivedText = text;
+
   } catch (error) {
     alert("Reading data error occured: " + error);
   }
@@ -45,12 +75,15 @@ function startTest() {
     alert("Choose level difficulty first!");
   } else if (!isMode) {
     alert("Choose typing mode first!");
-  } else {
+  } else if (!isTextClicked) {
+    isTextClicked = true;
     const content = document.getElementById("content");
     const startDiv = document.getElementById("start-info");
     content.style.filter = "blur(0)";
     startDiv.style.display = "none";
-    updateTimer();
+    if (isTimeClicked) {
+      updateTimer();
+    }
   }
 }
 
@@ -67,4 +100,15 @@ function updateTimer() {
       clearInterval();
     }
   }, 1000);
+}
+
+function updateDisplay(letter){
+  const content = document.getElementById("content");
+
+  const html = textSymbols.map((letter, i) => {
+    const className = i < index ? "correct" : "incorrect";
+    return `<span class="${className}">${letter}</span>`;
+  }).join('');
+  
+  content.innerHTML = html;
 }

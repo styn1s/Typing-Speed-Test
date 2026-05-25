@@ -16,7 +16,11 @@
         <img src="/assets/images/logo-large.svg" alt="Logo" />
       </div>
       <div id="record">
-        <img src="/assets/images/icon-personal-best.svg" alt="Prize" />
+        <img
+          id="prize-icon"
+          src="/assets/images/icon-personal-best.svg"
+          alt="Prize"
+        />
         <h2 id="record-text">Personal best: <span>92 WPM</span></h2>
       </div>
     </header>
@@ -28,7 +32,7 @@
           <li class="typing-info__item">
             Accuracy: <span id="accuracy">100%</span>
           </li>
-          <li class="typing-info__item">Time: <span id="time">0:60</span></li>
+          <li class="typing-info__item">Time: <span id="time">-:-</span></li>
         </ul>
 
         <div id="level-mode-info">
@@ -46,7 +50,9 @@
           </ul>
           <ul id="mode-info__list">
             <li>Mode:</li>
-            <li class="mode-info__item"><a href="#">Timed (60s)</a></li>
+            <li id="time-btn" class="mode-info__item">
+              <a href="#">Timed (60s)</a>
+            </li>
             <li class="mode-info__item"><a href="#">Passage</a></li>
           </ul>
         </div>
