@@ -1,27 +1,31 @@
 let isTextClicked = false;
 let isTimeClicked = false;
-let index = 0;
+let currentIndex = 0;
 let textSymbols;
-let receivedText;
+let mistakes = new Map();
 
 const levelLinks = document.querySelectorAll(".level-info__item a");
 const modeLinks = document.querySelectorAll(".mode-info__item a");
 const timeBtn = document.getElementById("time-btn");
+const content = document.getElementById("content");
 
 document.addEventListener("keydown", function(event) {
   if (event.key.length > 1) return;
 
-  if (textSymbols && index < textSymbols.length) {
-    const letter = textSymbols[index];
-
-    if (letter == event.key) {
-      console.log(event.key);
-    } else {
-      console.log("NO");
-    }
-    updateDisplay(letter);
-    index++;
+  if (currentIndex >= textSymbols.length) return;
+  
+  const expectedLetter = textSymbols[currentIndex];
+  const pressedKey = event.key;
+  
+  if (expectedLetter === pressedKey) {
+    currentIndex++;
+    updateDisplay(true);
+  } else {
+    mistakes.set(currentIndex, pressedKey);
+    currentIndex++;
+    updateDisplay(false, pressedKey);
   }
+  
 })
 
 timeBtn.addEventListener("click", () => {
@@ -60,7 +64,6 @@ async function renderLevel(level) {
     const text = getRandomText(level, data);
     container.innerHTML = text;
     textSymbols = text.split('');
-    receivedText = text;
 
   } catch (error) {
     alert("Reading data error occured: " + error);
@@ -84,6 +87,7 @@ function startTest() {
     if (isTimeClicked) {
       updateTimer();
     }
+    updateDisplay(true);
   }
 }
 
@@ -102,13 +106,27 @@ function updateTimer() {
   }, 1000);
 }
 
-function updateDisplay(letter){
-  const content = document.getElementById("content");
-
-  const html = textSymbols.map((letter, i) => {
-    const className = i < index ? "correct" : "incorrect";
-    return `<span class="${className}">${letter}</span>`;
-  }).join('');
+function updateDisplay(isCorrect, wrongKey = null) {
+  content.innerHTML = '';
   
-  content.innerHTML = html;
-}
+  textSymbols.forEach((symbol, idx) => {
+    const span = document.createElement('span');
+    
+    if (idx < currentIndex) {
+      if (mistakes.has(idx)) {
+        span.classList.add("incorrect");
+      } else {
+        span.classList.add("correct");
+      }
+    } else {
+      span.classList.add("feature");
+    }
+    
+    if (idx === currentIndex) {
+      span.classList.add("current");  
+    }
+    
+    span.textContent = symbol;
+    content.appendChild(span);
+  })
+};
