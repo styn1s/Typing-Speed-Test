@@ -1,32 +1,36 @@
 let isTextClicked = false;
 let isTimeClicked = false;
+let startTime = false;
 let currentIndex = 0;
-let textSymbols;
 let mistakes = new Map();
+let typedCount = 0;
+let textSymbols;
 
 const levelLinks = document.querySelectorAll(".level-info__item a");
 const modeLinks = document.querySelectorAll(".mode-info__item a");
 const timeBtn = document.getElementById("time-btn");
 const content = document.getElementById("content");
+const startDiv = document.getElementById("start-info");
+const accuracySpan = document.getElementById("accuracy");
+const timeSpan = document.getElementById("time");
+const wpmSpan = document.getElementById("wpm");
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
   if (event.key.length > 1) return;
 
   if (currentIndex >= textSymbols.length) return;
-  
+
   const expectedLetter = textSymbols[currentIndex];
   const pressedKey = event.key;
-  
-  if (expectedLetter === pressedKey) {
-    currentIndex++;
-    updateDisplay(true);
-  } else {
+  typedCount++;
+
+  if (expectedLetter !== pressedKey) {
     mistakes.set(currentIndex, pressedKey);
-    currentIndex++;
-    updateDisplay(false, pressedKey);
-  }
-  
-})
+  } 
+  currentIndex++;
+  updateDisplay();
+
+});
 
 timeBtn.addEventListener("click", () => {
   isTimeClicked = true;
@@ -63,8 +67,7 @@ async function renderLevel(level) {
 
     const text = getRandomText(level, data);
     container.innerHTML = text;
-    textSymbols = text.split('');
-
+    textSymbols = text.split("");
   } catch (error) {
     alert("Reading data error occured: " + error);
   }
@@ -79,16 +82,20 @@ function startTest() {
   } else if (!isMode) {
     alert("Choose typing mode first!");
   } else if (!isTextClicked) {
-    isTextClicked = true;
-    const content = document.getElementById("content");
-    const startDiv = document.getElementById("start-info");
-    content.style.filter = "blur(0)";
-    startDiv.style.display = "none";
+    onStartChange();
     if (isTimeClicked) {
       updateTimer();
     }
     updateDisplay(true);
   }
+
+  setInterval(() => {
+    if (currentIndex >= textSymbols.length) {
+      clearInterval();
+    } else {
+      updateWPM();
+    }
+  }, 1000);
 }
 
 function updateTimer() {
@@ -106,12 +113,12 @@ function updateTimer() {
   }, 1000);
 }
 
-function updateDisplay(isCorrect, wrongKey = null) {
-  content.innerHTML = '';
-  
+function updateDisplay() {
+  content.innerHTML = "";
+
   textSymbols.forEach((symbol, idx) => {
-    const span = document.createElement('span');
-    
+    const span = document.createElement("span");
+
     if (idx < currentIndex) {
       if (mistakes.has(idx)) {
         span.classList.add("incorrect");
@@ -121,12 +128,33 @@ function updateDisplay(isCorrect, wrongKey = null) {
     } else {
       span.classList.add("feature");
     }
-    
+
     if (idx === currentIndex) {
-      span.classList.add("current");  
+      span.classList.add("current");
     }
-    
+
     span.textContent = symbol;
     content.appendChild(span);
-  })
+  });
+}
+
+const onStartChange = () => {
+  isTextClicked = true;
+
+  if (!startTime) {
+    startTime = Temporal.Now.plainTimeISO();
+    console.log(startTime);
+  }
+
+  content.style.filter = "blur(0)";
+  startDiv.style.display = "none";
+  accuracySpan.style.color = "var(--red)";
+  timeSpan.style.color = "var(--yellow)";
 };
+
+const updateWPM = () => {
+  let now = Temporal.Now.plainTimeISO();
+  let wastedTime = startTime.until(now);
+  let wpm = (typedCount / 5) * (60 / wastedTime.seconds);
+  wpmSpan.innerHTML = Math.round(wpm);
+}

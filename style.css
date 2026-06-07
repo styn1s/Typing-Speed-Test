@@ -55,12 +55,9 @@ body {
   width: 20px;
 }
 
-#accuracy {
-  color: hsl(354, 63%, 57%);
-}
-
+#accuracy,
 #time {
-  color: hsl(49, 85%, 70%);
+  color: var(--white);
 }
 
 #record-text span {
