@@ -52,7 +52,7 @@ modeLinks.forEach((link) => {
   });
 });
 
-function getRandomText(level, data) {
+const getRandomText = (level, data) => {
   const arr = data[level];
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex].text;
@@ -73,7 +73,7 @@ async function renderLevel(level) {
   }
 }
 
-function startTest() {
+const startTest = () =>  {
   const isLevel = document.querySelector(".level-info__item a.active");
   const isMode = document.querySelector(".mode-info__item a.active");
 
@@ -86,19 +86,19 @@ function startTest() {
     if (isTimeClicked) {
       updateTimer();
     }
-    updateDisplay(true);
+    updateDisplay();
   }
 
   setInterval(() => {
     if (currentIndex >= textSymbols.length) {
       clearInterval();
     } else {
-      updateWPM();
+      updateStats();
     }
   }, 1000);
 }
 
-function updateTimer() {
+const updateTimer = () => {
   let seconds = 60;
   const timeSpan = document.getElementById("time");
 
@@ -113,7 +113,8 @@ function updateTimer() {
   }, 1000);
 }
 
-function updateDisplay() {
+
+const updateDisplay = () => {
   content.innerHTML = "";
 
   textSymbols.forEach((symbol, idx) => {
@@ -152,9 +153,12 @@ const onStartChange = () => {
   timeSpan.style.color = "var(--yellow)";
 };
 
-const updateWPM = () => {
-  let now = Temporal.Now.plainTimeISO();
-  let wastedTime = startTime.until(now);
-  let wpm = (typedCount / 5) * (60 / wastedTime.seconds);
+
+const updateStats = () => {
+  const now = Temporal.Now.plainTimeISO();
+  const wastedTime = startTime.until(now);
+  const wpm = (typedCount / 5) * (60 / wastedTime.seconds);
+  const accuracy = ((typedCount - mistakes.size) / typedCount) * 100;
   wpmSpan.innerHTML = Math.round(wpm);
+  accuracySpan.innerHTML = Math.round(accuracy) + "%";
 }
