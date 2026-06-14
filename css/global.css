@@ -1,0 +1,44 @@
+:root {
+  --text: hsl(240, 1%, 59%);
+  --white: hsl(0, 0%, 100%);
+  --red: hsl(354, 63%, 57%);
+  --yellow: hsl(49, 85%, 70%);
+  --green: hsl(140, 63%, 57%);
+  --blue: hsl(210, 100%, 65%);
+  --light-blue: hsl(210, 62%, 54%);
+  --dark-blue: hsl(214, 100%, 55%);
+  --line: hsl(0, 0%, 15%);
+  --black: hsl(0, 0%, 7%);
+}
+
+body {
+  position: relative;
+  margin: 0;
+  background-color: var(--black);
+  font-family: "Sora", serif;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 90px;
+}
+
+#record {
+  display: flex;
+  gap: 10px;
+}
+
+#record-text {
+  color: var(--text);
+  font-weight: 300;
+  font-size: 16px;
+}
+
+#record-text span {
+  color: var(--white);
+}
+
+#prize-icon {
+  width: 20px;
+}
