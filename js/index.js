@@ -16,8 +16,8 @@ const startDiv = document.getElementById("start-info");
 const accuracySpan = document.getElementById("accuracy");
 const timeSpan = document.getElementById("time");
 const wpmSpan = document.getElementById("wpm");
-
-const keys = ["wpm", "accuracy", "correct", "incorrect"];
+const record = document.getElementById("record-info");
+const logo = document.getElementById("logo");
 
 document.addEventListener("keydown", (event) => {
   if (event.key.length > 1) return;
@@ -40,15 +40,31 @@ document.addEventListener("keydown", (event) => {
   if (currentIndex === textSymbols.length) {
     event.preventDefault();
 
-    if (localStorage.getItem("wpm") === null) {
+    if (localStorage.getItem("highscore") == 0) {
       saveStats();
       testCompleted = true;
-      window.location.href = "/baseline.html";
+      window.location.href = "/pages/baseline.html";
+    } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
+      saveStats();
+      testCompleted = true;
+      window.location.href = "/pages/completed.html";
+    } else {
+      saveStats();
+      testCompleted = true;
+      window.location.href = "/pages/highscore.html";
     }
     
     return;
   }
 });
+
+(function updateBest() {
+  const highscore = localStorage.getItem("highscore");
+  if (highscore === null) {
+    localStorage.setItem("highscore", 0)
+  }
+  record.innerHTML = highscore + " WPM";
+})();
 
 timeBtn.addEventListener("click", () => {
   isTimeClicked = true;
@@ -97,7 +113,7 @@ async function renderLevel(level) {
   try {
     const container = document.getElementById("content");
 
-    const res = await fetch("data.json");
+    const res = await fetch("/assets/data.json");
     const data = await res.json();
 
     const text = getRandomText(level, data);
@@ -227,12 +243,12 @@ const updateStats = () => {
 const saveStats = () => {
   if (testCompleted) return;
 
+  if (Number(wpmSpan.innerHTML) > localStorage.getItem("highscore")) {
+    localStorage.setItem("highscore", wpmSpan.innerHTML);
+  }
+
   localStorage.setItem("wpm", wpmSpan.innerHTML);
   localStorage.setItem("accuracy", accuracySpan.innerHTML);
   localStorage.setItem("correct", correct);
   localStorage.setItem("incorrect", mistakes.size);
-
-  for (let key of keys) {
-    console.log(localStorage.getItem(key));
-  }
 };

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/baseline.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Completed</title>
+  </head>
+  <body>
+    <header id="header">
+      <div id="logo">
+        <img src="/assets/images/logo-large.svg" alt="Logo" />
+      </div>
+      <div id="record">
+        <img
+          id="prize-icon"
+          src="/assets/images/icon-personal-best.svg"
+          alt="Prize"
+        />
+        <h2 id="record-text">
+          Personal best: <span id="record-info">92 WPM</span>
+        </h2>
+      </div>
+    </header>
+
+    <main id="main">
+      <img
+        id="icon-completed"
+        src="/assets/images/icon-completed.svg"
+        alt="Completed icon"
+      />
+      <h1 id="baseline-heading">Test Complete!</h1>
+      <p id="baseline-text">
+        Solid run. Keep pushing to beat your highscore.
+      </p>
+
+      <ul id="stats-list">
+        <li class="stats-list__item">
+          <p class="stats-list__text">
+            WPM:<br /><strong class="stats-list__info"
+              ><span id="wpm"></span></strong
+            >
+          </p>
+        </li>
+        <li class="stats-list__item">
+          <p class="stats-list__text">
+            Accuracy:<br /><strong class="stats-list__info"
+              ><span id="accuracy"></span></strong
+            >
+          </p>
+        </li>
+        <li class="stats-list__item">
+          <p class="stats-list__text">
+            Characters<br /><strong class="stats-list__info"
+              ><span id="correct"></span>/<span id="incorrect"
+                ></span
+              ></strong
+            >
+          </p>
+        </li>
+      </ul>
+
+      <a href="/pages/index.html" id="restart-btn"
+        >Go again
+        <img src="/assets/images/icon-restart.svg" alt="Restart icon" />
+      </a>
+
+      <img id="star-1" src="/assets/images/pattern-star-1.svg" alt="Star-1" />
+      <img id="star-2" src="/assets/images/pattern-star-2.svg" alt="Star-2" />
+    </main>
+
+    <script src="/js/baseline.js"></script>
+  </body>
+</html>
