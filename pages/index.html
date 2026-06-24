@@ -27,7 +27,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <div id="typing-info">
         <ul id="typing-info__list">
           <li class="typing-info__item">WPM: <span id="wpm">0</span></li>
@@ -61,6 +61,10 @@
       </div>
 
       <div id="content" onclick="startTest()"></div>
+
+      <button id="restart-btn">
+        Restart Test <img src="/assets/images/icon-restart.svg" alt="Restart icon">
+      </button>
 
       <div id="start-info">
         <a href="#" id="start-info__button" onclick="startTest()"

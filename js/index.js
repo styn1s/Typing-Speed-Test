@@ -18,6 +18,7 @@ const timeSpan = document.getElementById("time");
 const wpmSpan = document.getElementById("wpm");
 const record = document.getElementById("record-info");
 const logo = document.getElementById("logo");
+const restartBtn = document.getElementById("restart-btn");
 
 document.addEventListener("keydown", (event) => {
   if (event.key.length > 1) return;
@@ -143,6 +144,7 @@ const startTest = () => {
     if (isTimeClicked) {
       updateTimer();
     }
+    addRestartBtn();
     updateDisplay();
   }
 
@@ -252,3 +254,8 @@ const saveStats = () => {
   localStorage.setItem("correct", correct);
   localStorage.setItem("incorrect", mistakes.size);
 };
+
+const addRestartBtn = () => {
+  content.classList.add("border");
+  restartBtn.style.visibility = "visible";
+}

@@ -16,6 +16,10 @@
   color: var(--text);
 }
 
+#main {
+  position: relative;
+}
+
 #accuracy,
 #time {
   color: var(--white);
@@ -118,6 +122,29 @@
   color: var(--text);
   font-size: 2rem;
   filter: blur(5px);
+}
+
+.border {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 90px;
+}
+
+#restart-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  padding: 15px 15px;
+  gap: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--line);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font: bold 16px "Sora", serif;
+  visibility: hidden;
+  cursor: pointer;
 }
 
 #start-info {
