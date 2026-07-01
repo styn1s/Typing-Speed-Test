@@ -74,7 +74,10 @@ timeBtn.addEventListener("click", () => {
 
 levelLinks.forEach((link) => {
   link.addEventListener("click", function (e) {
+    let pressedLink = e.target;
     e.preventDefault();
+    let level = pressedLink.textContent.toLowerCase();
+    localStorage.setItem("level", level);
     levelLinks.forEach((l) => l.classList.remove("active"));
     this.classList.add("active");
   });
@@ -232,8 +235,18 @@ const onStartChange = () => {
 const updateStats = () => {
   const now = Temporal.Now.plainTimeISO();
   const wastedTime = startTime.until(now);
-  const wpm = (typedCount / 5) * (60 / wastedTime.seconds);
+
+  const seconds = wastedTime.seconds + wastedTime.milliseconds / 1000;
+  
+  if (seconds < 0.5 || typedCount === 0) {
+    wpmSpan.innerHTML = "0";
+    accuracySpan.innerHTML = "0%";
+    return;
+  }
+
+  const wpm = Math.min((typedCount / 5) * (60 / seconds), 999);
   const accuracy = ((typedCount - mistakes.size) / typedCount) * 100;
+
   wpmSpan.innerHTML = Math.round(wpm);
   accuracySpan.innerHTML = Math.round(accuracy) + "%";
 };
@@ -255,7 +268,23 @@ const saveStats = () => {
   localStorage.setItem("incorrect", mistakes.size);
 };
 
+/**
+ * Adds restart button after starting the test.
+ * @return {void}
+ */
 const addRestartBtn = () => {
   content.classList.add("border");
   restartBtn.style.visibility = "visible";
+}
+
+/**
+ * Restarts the test.
+ * @return {void}
+ */
+const restartTest = () => {
+  currentIndex = 0;
+  typedCount = 0;
+  mistakes.clear();
+  startTime = Temporal.Now.plainTimeISO();
+  renderLevel(localStorage.getItem("level"));
 }
