@@ -10,7 +10,7 @@ let textSymbols;
 
 const levelLinks = document.querySelectorAll(".level-info__item a");
 const modeLinks = document.querySelectorAll(".mode-info__item a");
-const timeBtn = document.getElementById("time-btn");
+const timeBtns = document.querySelectorAll(".time-btn");
 const content = document.getElementById("content");
 const startDiv = document.getElementById("start-info");
 const accuracySpan = document.getElementById("accuracy");
@@ -19,6 +19,26 @@ const wpmSpan = document.getElementById("wpm");
 const record = document.getElementById("record-info");
 const logo = document.getElementById("logo");
 const restartBtn = document.getElementById("restart-btn");
+const mobileInput = document.getElementById('mobile-input');
+
+const firstDropdown = document.getElementById("dropdown-1");
+const secDropdown = document.getElementById("dropdown-2");
+const firstMenu = document.getElementById("menu-1");
+const secMenu = document.getElementById("menu-2");
+const firstDropBtn = document.getElementById("drop-btn-1");
+const secDropBtn = document.getElementById("drop-btn-2");
+const firstDropHead = document.getElementById("drop-head-1");
+const secDropHead = document.getElementById("drop-head-2");
+const firstRadios = document.querySelectorAll('input[name="level"]');
+const secRadios = document.querySelectorAll('input[name="difficulty"]');
+
+(function updateBest() {
+  const highscore = localStorage.getItem("highscore");
+  if (highscore === null) {
+    localStorage.setItem("highscore", 0);
+  }
+  record.innerHTML = highscore + " WPM";
+})();
 
 document.addEventListener("keydown", (event) => {
   if (event.key.length > 1) return;
@@ -54,22 +74,79 @@ document.addEventListener("keydown", (event) => {
       testCompleted = true;
       window.location.href = "/pages/highscore.html";
     }
-    
+
     return;
   }
 });
 
-(function updateBest() {
-  const highscore = localStorage.getItem("highscore");
-  if (highscore === null) {
-    localStorage.setItem("highscore", 0)
-  }
-  record.innerHTML = highscore + " WPM";
-})();
+mobileInput.addEventListener('input', (e) => {
+  if (testCompleted) return;
 
-timeBtn.addEventListener("click", () => {
-  isTimeClicked = true;
-  timeSpan.innerHTML = "00:60";
+  const expectedLetter = textSymbols[currentIndex];
+  const pressedKey = e.target.value.slice(-1); // Получаем последний введенный символ
+
+  typedCount++;
+
+  if (expectedLetter !== pressedKey) {
+    mistakes.set(currentIndex, pressedKey);
+  } else {
+    correct++;
+  }
+  
+  currentIndex++;
+  updateDisplay();
+
+  if (currentIndex === textSymbols.length) {
+    event.preventDefault();
+
+    if (localStorage.getItem("highscore") == 0) {
+      saveStats();
+      testCompleted = true;
+      window.location.href = "/pages/baseline.html";
+    } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
+      saveStats();
+      testCompleted = true;
+      window.location.href = "/pages/completed.html";
+    } else {
+      saveStats();
+      testCompleted = true;
+      window.location.href = "/pages/highscore.html";
+    }
+
+    e.target.value = '';
+
+    return;
+  }
+  
+});
+
+firstDropBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  firstMenu.classList.toggle("active");
+});
+
+document.addEventListener("click", (e) => {
+  if (!firstDropdown.contains(e.target)) {
+    firstMenu.classList.remove("active");
+  }
+});
+
+secDropBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  secMenu.classList.toggle("active");
+});
+
+document.addEventListener("click", (e) => {
+  if (!secDropdown.contains(e.target)) {
+    secMenu.classList.remove("active");
+  }
+});
+
+timeBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    isTimeClicked = true;
+    timeSpan.innerHTML = "00:60";
+  });
 });
 
 levelLinks.forEach((link) => {
@@ -88,6 +165,24 @@ modeLinks.forEach((link) => {
     e.preventDefault();
     modeLinks.forEach((l) => l.classList.remove("active"));
     this.classList.add("active");
+  });
+});
+
+firstRadios.forEach((radio) => {
+  radio.addEventListener("change", () => {
+    const selectedLabel = radio
+      .closest(".dropdown-item")
+      .querySelector("span").textContent;
+    firstDropHead.textContent = selectedLabel;
+  });
+});
+
+secRadios.forEach((radio) => {
+  radio.addEventListener("change", () => {
+    const selectedLabel = radio
+      .closest(".dropdown-item")
+      .querySelector("span").textContent;
+    secDropHead.textContent = selectedLabel;
   });
 });
 
@@ -135,8 +230,12 @@ async function renderLevel(level) {
  * @returns {void}
  */
 const startTest = () => {
-  const isLevel = document.querySelector(".level-info__item a.active");
-  const isMode = document.querySelector(".mode-info__item a.active");
+  const isLevel =
+    document.querySelector(".level-info__item a.active") ||
+    document.querySelector("input[name='level']:checked");
+  const isMode =
+    document.querySelector(".mode-info__item a.active") ||
+    document.querySelector("input[name='difficulty']:checked");
 
   if (!isLevel) {
     alert("Choose level difficulty first!");
@@ -149,6 +248,10 @@ const startTest = () => {
     }
     addRestartBtn();
     updateDisplay();
+  }
+
+  if (window.innerWidth >= 320) {
+    mobileInput.focus();
   }
 
   setInterval(() => {
@@ -223,8 +326,8 @@ const onStartChange = () => {
 
   content.style.filter = "blur(0)";
   startDiv.style.display = "none";
-  accuracySpan.style.color = "var(--red)";
-  timeSpan.style.color = "var(--yellow)";
+  accuracySpan.classList.add("active");
+  timeSpan.classList.add("active");
 };
 
 /**
@@ -233,18 +336,19 @@ const onStartChange = () => {
  * @returns {void}
  */
 const updateStats = () => {
-  const now = Temporal.Now.plainTimeISO();
+  const now = Temporal.Now.zonedDateTimeISO();
   const wastedTime = startTime.until(now);
 
-  const seconds = wastedTime.seconds + wastedTime.milliseconds / 1000;
-  
+  const totalMilliseconds = wastedTime.total({ unit: "milliseconds" });
+  const seconds = totalMilliseconds / 1000;
+
   if (seconds < 0.5 || typedCount === 0) {
     wpmSpan.innerHTML = "0";
     accuracySpan.innerHTML = "0%";
     return;
   }
 
-  const wpm = Math.min((typedCount / 5) * (60 / seconds), 999);
+  const wpm = (typedCount / 5) * (60 / seconds);
   const accuracy = ((typedCount - mistakes.size) / typedCount) * 100;
 
   wpmSpan.innerHTML = Math.round(wpm);
@@ -275,7 +379,7 @@ const saveStats = () => {
 const addRestartBtn = () => {
   content.classList.add("border");
   restartBtn.style.visibility = "visible";
-}
+};
 
 /**
  * Restarts the test.
@@ -287,4 +391,4 @@ const restartTest = () => {
   mistakes.clear();
   startTime = Temporal.Now.plainTimeISO();
   renderLevel(localStorage.getItem("level"));
-}
+};

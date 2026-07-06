@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/index.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
       rel="stylesheet"
@@ -15,7 +15,13 @@
   <body>
     <header id="header">
       <div id="logo">
-        <img src="/assets/images/logo-large.svg" alt="Logo" />
+        <picture>
+          <source
+            media="(min-width: 320px)"
+            srcset="/assets/images/logo-small.svg"
+          />
+          <img src="/assets/images/logo-large.svg" alt="Logo" />
+        </picture>
       </div>
       <div id="record">
         <img
@@ -23,7 +29,10 @@
           src="/assets/images/icon-personal-best.svg"
           alt="Prize"
         />
-        <h2 id="record-text">Personal best: <span id="record-info">92 WPM</span></h2>
+        <h2 id="record-text">
+          <span class="hide-on-mobile">Personal best:</span>
+          <span id="record-info">92 WPM</span>
+        </h2>
       </div>
     </header>
 
@@ -50,20 +59,104 @@
               <a onclick="renderLevel('hard')" href="#">Hard</a>
             </li>
           </ul>
+
+          <div class="dropdown" id="dropdown-1">
+            <button class="dropdown-btn" id="drop-btn-1">
+              <span class="dropdown-heading" id="drop-head-1">Level</span>
+              <img
+                class="dropdown-arrow"
+                src="/assets/images/select-arrow.svg"
+                alt="Arrow"
+              />
+            </button>
+
+            <div class="dropdown-menu" id="menu-1">
+              <div class="dropdown-item">
+                <label>
+                  <input
+                    type="radio"
+                    name="level"
+                    value="easy"
+                    onclick="renderLevel('easy')"
+                  />
+                  <span class="dropdown-text">Easy</span>
+                </label>
+              </div>
+
+              <div class="dropdown-item">
+                <label>
+                  <input
+                    type="radio"
+                    name="level"
+                    value="medium"
+                    onclick="renderLevel('medium')"
+                  />
+                  <span class="dropdown-text">Medium</span>
+                </label>
+              </div>
+
+              <div class="dropdown-item">
+                <label>
+                  <input
+                    type="radio"
+                    name="level"
+                    value="hard"
+                    onclick="renderLevel('hard')"
+                  />
+                  <span class="dropdown-text">Hard</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
           <ul id="mode-info__list">
             <li>Mode:</li>
-            <li id="time-btn" class="mode-info__item">
+            <li class="mode-info__item time-btn">
               <a href="#">Timed (60s)</a>
             </li>
             <li class="mode-info__item"><a href="#">Passage</a></li>
           </ul>
+
+          <div class="dropdown" id="dropdown-2">
+            <button class="dropdown-btn" id="drop-btn-2">
+              <span class="dropdown-heading" id="drop-head-2">Mode</span>
+              <img
+                class="dropdown-arrow"
+                src="/assets/images/select-arrow.svg"
+                alt="Arrow"
+              />
+            </button>
+
+            <div class="dropdown-menu" id="menu-2">
+              <div class="dropdown-item">
+                <label class="time-btn">
+                  <input type="radio" name="difficulty" value="easy" />
+                  <span class="dropdown-text">Timed(60s)</span>
+                </label>
+              </div>
+
+              <div class="dropdown-item">
+                <label>
+                  <input type="radio" name="difficulty" value="medium" />
+                  <span class="dropdown-text">Passage</span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      <input
+        type="text"
+        id="mobile-input"
+        autofocus
+        inputmode="text"
+      />
       <div id="content" onclick="startTest()"></div>
 
       <button id="restart-btn" onclick="restartTest()">
-        Restart Test <img src="/assets/images/icon-restart.svg" alt="Restart icon">
+        Restart Test
+        <img src="/assets/images/icon-restart.svg" alt="Restart icon" />
       </button>
 
       <div id="start-info">

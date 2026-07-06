@@ -1,0 +1,364 @@
+@import "colors";
+
+.correct {
+  color: $green;
+}
+
+.incorrect {
+  color: $red;
+  text-decoration: underline;
+}
+
+.current {
+  color: $text;
+  background-color: hsl(0, 1%, 32%);
+}
+
+.feature {
+  color: $text;
+}
+
+#main {
+  position: relative;
+}
+
+#accuracy,
+#time {
+  color: $white;
+}
+
+#accuracy.active {
+  color: $red;
+}
+
+#time.active {
+  color: $yellow;
+}
+
+#typing-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 90px;
+  padding-bottom: 10px;
+
+  &__list {
+    display: flex;
+    color: $text;
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+.typing-info {
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0;
+    border-right: 1px solid $line;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    span {
+      margin-left: 10px;
+      font:
+        bold 24px "Sora",
+        serif;
+      color: $white;
+    }
+  }
+}
+
+#level-mode-info {
+  display: flex;
+}
+
+.select-replacement {
+  display: none;
+}
+
+#level-info,
+#mode-info {
+  &__list {
+    display: flex;
+    color: $text;
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+#level-info {
+  &__list {
+    gap: 7px;
+    padding-right: 20px;
+    border-right: 1px solid $line;
+  }
+}
+
+#mode-info {
+  &__list {
+    gap: 7px;
+    padding-left: 20px;
+  }
+}
+
+.level-info,
+.mode-info {
+  &__item {
+    a {
+      padding: 10px;
+      border: 1px solid $text;
+      border-radius: 10px;
+      text-decoration: none;
+      color: $white;
+
+      &:hover {
+        color: $blue;
+        border-color: $blue;
+      }
+
+      &:focus {
+        outline: 2px solid $blue;
+        outline-offset: 2px;
+      }
+
+      &.active {
+        color: $blue;
+        border-color: $blue;
+      }
+    }
+  }
+}
+
+#mobile-input {
+  position: absolute;
+  opacity: 0;
+  height: 1px;
+  width: 1px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#content {
+  margin: 0 90px;
+  color: $text;
+  font-size: 2rem;
+  filter: blur(8px);
+}
+
+.border {
+  border-top: 1px solid $line;
+  border-bottom: 1px solid $line;
+  padding-bottom: 90px;
+}
+
+#restart-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  padding: 15px 15px;
+  gap: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $line;
+  color: $white;
+  border: none;
+  border-radius: 10px;
+  font:
+    bold 16px "Sora",
+    serif;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#start-info {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+
+  &__button {
+    text-decoration: none;
+    color: $white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: $dark-blue;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $light-blue;
+      transform: scale(1.02);
+    }
+  }
+
+  &__label {
+    color: $white;
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  body {
+    overflow: scroll;
+  }
+
+  #header {
+    margin-bottom: 0;
+  }
+
+  #main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #typing-info {
+    flex-direction: column;
+    margin: 30px 0 0 0;
+    width: fit-content;
+
+    &__list {
+      margin-top: 0;
+    }
+  }
+
+  .typing-info__item {
+    flex-direction: column;
+
+    span {
+      margin: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  #level-mode-info {
+    gap: 10px;
+  }
+
+  #level-info,
+  #mode-info {
+    &__list {
+      display: none;
+    }
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    min-width: 150px;
+    visibility: hidden;
+    background-color: $line;
+    border-radius: 10px;
+    z-index: 1;
+
+    &.active {
+      visibility: visible;
+    }
+  }
+
+  .dropdown-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 150px;
+    padding: 5px 0;
+    background-color: $black;
+    color: $white;
+    border-radius: 7px;
+    border: 1px solid $text;
+    font-family: "Sora", serif;
+  }
+
+  .dropdown-text {
+    padding-left: 5px;
+    color: $white;
+  }
+
+  .dropdown-item {
+    padding: 10px 0 10px 7px;
+    border-bottom: 1px solid $divider;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    input[type="radio"] {
+      position: relative;
+      appearance: none;
+      border: 2px solid $white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      margin-top: 0;
+      margin-bottom: 1px;
+
+      &:checked {
+        border-color: $light-blue;
+        background: $light-blue;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 6px;
+          height: 6px;
+          background: $black;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  .dropdown-arrow {
+    width: 10px;
+  }
+
+  #content {
+    margin: 0 20px 30px;
+  }
+
+  .border {
+    padding: 30px 0;
+  }
+
+  #restart-btn {
+    position: relative;
+    left: 0;
+    transform: none;
+    margin: 0 0 50px 0;
+  }
+
+  #start-info {
+    width: 100%;
+
+    &__label {
+      font-size: 1rem;
+    }
+  }
+}

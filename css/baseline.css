@@ -1,5 +1,4 @@
 @import "global.css";
-
 #main {
   margin-top: 70px;
   display: flex;
@@ -11,12 +10,11 @@
 #baseline-heading {
   margin-top: 50px;
   margin-bottom: 0;
-  color: var(--white);
+  color: hsl(0, 0%, 100%);
 }
-
 #baseline-text {
   margin-top: 8px;
-  color: var(--text);
+  color: hsl(240, 1%, 59%);
 }
 
 #icon-completed {
@@ -27,7 +25,7 @@
 
 #stats-list {
   padding: 0;
-  color: var(--text);
+  color: hsl(240, 1%, 59%);
   list-style-type: none;
   font-size: 20px;
   display: flex;
@@ -40,28 +38,26 @@
   border: 1px solid rgb(72, 72, 72);
   border-radius: 10px;
 }
-
 .stats-list__text {
   margin: 0;
   line-height: 2;
   font-size: 16px;
 }
-
 .stats-list__info {
   font-size: 20px;
 }
 
 #wpm {
-  color: var(--white);
+  color: hsl(0, 0%, 100%);
 }
 
 #accuracy,
 #incorrect {
-  color: var(--red);
+  color: hsl(354, 63%, 57%);
 }
 
 #correct {
-  color: var(--green);
+  color: hsl(140, 63%, 57%);
 }
 
 #restart-btn {
@@ -70,25 +66,21 @@
   padding: 15px 20px;
   gap: 10px;
   text-decoration: none;
-  background-color: var(--white);
-  color: var(--black);
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 7%);
   border-radius: 10px;
 }
-
 #restart-btn img {
   filter: invert(1);
 }
 
-#star-1,
-#star-2 {
+#star-1, #star-2 {
   position: absolute;
 }
-
 #star-1 {
   right: 90px;
   bottom: 20px;
 }
-
 #star-2 {
   top: 150px;
   left: 90px;
@@ -96,4 +88,4 @@
 
 #confetti {
   top: 500px;
-}
+}/*# sourceMappingURL=baseline.css.map */
