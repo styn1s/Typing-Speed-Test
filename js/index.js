@@ -19,7 +19,7 @@ const wpmSpan = document.getElementById("wpm");
 const record = document.getElementById("record-info");
 const logo = document.getElementById("logo");
 const restartBtn = document.getElementById("restart-btn");
-const mobileInput = document.getElementById('mobile-input');
+const mobileInput = document.getElementById("mobile-input");
 
 const firstDropdown = document.getElementById("dropdown-1");
 const secDropdown = document.getElementById("dropdown-2");
@@ -79,7 +79,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-mobileInput.addEventListener('input', (e) => {
+mobileInput.addEventListener("input", (e) => {
   if (testCompleted) return;
 
   const expectedLetter = textSymbols[currentIndex];
@@ -92,7 +92,7 @@ mobileInput.addEventListener('input', (e) => {
   } else {
     correct++;
   }
-  
+
   currentIndex++;
   updateDisplay();
 
@@ -113,11 +113,10 @@ mobileInput.addEventListener('input', (e) => {
       window.location.href = "/pages/highscore.html";
     }
 
-    e.target.value = '';
+    e.target.value = "";
 
     return;
   }
-  
 });
 
 firstDropBtn.addEventListener("click", (e) => {
@@ -250,7 +249,7 @@ const startTest = () => {
     updateDisplay();
   }
 
-  if (window.innerWidth >= 320) {
+  if (window.innerWidth >= 320 && getDeviceType() == "mobile") {
     mobileInput.focus();
   }
 
@@ -392,3 +391,19 @@ const restartTest = () => {
   startTime = Temporal.Now.plainTimeISO();
   renderLevel(localStorage.getItem("level"));
 };
+
+const getDeviceType = () => {
+  const ua = navigator.userAgent;
+
+  // Проверка на планшет
+  if (/Tablet|iPad/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua))) {
+    return "tablet";
+  }
+
+  // Проверка на мобильное устройство
+  if (/Mobi|Android|iPhone|iPod|BlackBerry|Windows Phone/i.test(ua)) {
+    return "mobile";
+  }
+
+  return "desktop";
+}

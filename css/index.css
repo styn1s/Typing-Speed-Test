@@ -197,8 +197,10 @@
   #typing-info {
     flex-direction: column;
     margin: 30px 0 0 0;
+    padding-bottom: 15px;
     width: -moz-fit-content;
     width: fit-content;
+    border-bottom: 1px solid hsl(0, 0%, 15%);
   }
   #typing-info__list {
     margin-top: 0;
@@ -225,7 +227,7 @@
   .dropdown-menu {
     position: absolute;
     top: calc(100% + 8px);
-    min-width: 150px;
+    min-width: 135px;
     visibility: hidden;
     background-color: hsl(0, 0%, 15%);
     border-radius: 10px;
@@ -239,7 +241,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 150px;
+    width: 8.4375rem;
     padding: 5px 0;
     background-color: hsl(0, 0%, 7%);
     color: hsl(0, 0%, 100%);
@@ -250,6 +252,7 @@
   .dropdown-text {
     padding-left: 5px;
     color: hsl(0, 0%, 100%);
+    font-size: 14px;
   }
   .dropdown-item {
     padding: 10px 0 10px 7px;
@@ -294,10 +297,11 @@
     width: 10px;
   }
   #content {
-    margin: 0 20px 30px;
+    margin: 30px 20px;
   }
   .border {
-    padding: 30px 0;
+    padding-bottom: 30px;
+    border-top: none;
   }
   #restart-btn {
     position: relative;

@@ -225,7 +225,9 @@
   #typing-info {
     flex-direction: column;
     margin: 30px 0 0 0;
+    padding-bottom: 15px;
     width: fit-content;
+    border-bottom: 1px solid $line;
 
     &__list {
       margin-top: 0;
@@ -262,7 +264,7 @@
   .dropdown-menu {
     position: absolute;
     top: calc(100% + 8px);
-    min-width: 150px;
+    min-width: 135px;
     visibility: hidden;
     background-color: $line;
     border-radius: 10px;
@@ -278,7 +280,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 150px;
+    width: 8.4375rem;
     padding: 5px 0;
     background-color: $black;
     color: $white;
@@ -290,6 +292,7 @@
   .dropdown-text {
     padding-left: 5px;
     color: $white;
+    font-size: 14px;
   }
 
   .dropdown-item {
@@ -340,11 +343,12 @@
   }
 
   #content {
-    margin: 0 20px 30px;
+    margin: 30px 20px;
   }
 
   .border {
-    padding: 30px 0;
+    padding-bottom: 30px;
+    border-top: none;
   }
 
   #restart-btn {

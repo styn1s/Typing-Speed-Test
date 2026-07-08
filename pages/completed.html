@@ -14,7 +14,13 @@
   <body>
     <header id="header">
       <div id="logo">
-        <img src="/assets/images/logo-large.svg" alt="Logo" />
+        <picture>
+          <source
+            media="(min-width: 320px)"
+            srcset="/assets/images/logo-small.svg"
+          />
+          <img src="/assets/images/logo-large.svg" alt="Logo" />
+        </picture>
       </div>
       <div id="record">
         <img
@@ -23,7 +29,8 @@
           alt="Prize"
         />
         <h2 id="record-text">
-          Personal best: <span id="record-info">92 WPM</span>
+          <span class="hide-on-mobile">Personal best:</span>
+          <span id="record-info">92 WPM</span>
         </h2>
       </div>
     </header>
@@ -36,7 +43,7 @@
       />
       <h1 id="baseline-heading">Test Complete!</h1>
       <p id="baseline-text">
-        Solid run. Keep pushing to beat your highscore.
+        Solid run. Keep pushing to beat your high score.
       </p>
 
       <ul id="stats-list">
@@ -66,7 +73,7 @@
       </ul>
 
       <a href="/pages/index.html" id="restart-btn"
-        >Go again
+        >Go Again
         <img src="/assets/images/icon-restart.svg" alt="Restart icon" />
       </a>
 

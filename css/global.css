@@ -3,7 +3,7 @@ body {
   margin: 0;
   background-color: hsl(0, 0%, 7%);
   font-family: "Sora", serif;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #header {
