@@ -14,7 +14,13 @@
   <body>
     <header id="header">
       <div id="logo">
-        <img src="/assets/images/logo-large.svg" alt="Logo" />
+        <picture>
+          <source
+            media="(min-width: 320px)"
+            srcset="/assets/images/logo-small.svg"
+          />
+          <img src="/assets/images/logo-large.svg" alt="Logo" />
+        </picture>
       </div>
       <div id="record">
         <img
@@ -23,7 +29,8 @@
           alt="Prize"
         />
         <h2 id="record-text">
-          Personal best: <span id="record-info">92 WPM</span>
+          <span class="hide-on-mobile">Personal best:</span>
+          <span id="record-info">92 WPM</span>
         </h2>
       </div>
     </header>

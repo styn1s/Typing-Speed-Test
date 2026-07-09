@@ -96,7 +96,7 @@
   }
 
   &-2 {
-    top: 150px;
+    top: 50px;
     left: 90px;
   }
 }
@@ -111,7 +111,9 @@
   }
 
   #main {
+    position: relative;
     width: 100%;
+    margin-top: 30px;
   }
 
   #icon-completed {
@@ -120,6 +122,7 @@
 
   #baseline-heading {
     font-size: 1.5rem;
+    margin-top: 30px;
   }
 
   #baseline-text {
@@ -138,14 +141,17 @@
     box-sizing: border-box;
   }
 
+  .stats-list__text {
+    line-height: 1.7;
+  }
+
   #restart-btn {
-    margin: 30px 0;
+    margin: 20px 0 100px;
   }
 
   #star {
     &-1 {
       width: 30px;
-      top: 770px;
       right: 30px;
       padding-bottom: 40px;
     }
@@ -154,6 +160,17 @@
       width: 20px;
       left: 20px;
     }
+  }
+
+  #restart-btn {
+    z-index: 1;
+  }
+
+  #confetti {
+    position: absolute;
+    top: 570px;
+    left: -35px;
+    width: 700px;
   }
 
 }
