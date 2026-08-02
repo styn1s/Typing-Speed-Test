@@ -105,15 +105,16 @@
   top: 500px;
 }
 
-@media screen and (min-width: $breakpoint-sm) {
+@media screen and (min-width: $breakpoint-xs) {
   body {
     height: 100%;
+    overflow: hidden;
   }
 
   #main {
     position: relative;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 60px;
   }
 
   #icon-completed {
@@ -172,5 +173,48 @@
     left: -35px;
     width: 700px;
   }
+}
 
+@media screen and (min-width: 530px) {
+  #main {
+    overflow: visible;
+  }
+
+  #stats-list {
+    flex-direction: row;
+    width: 28rem;
+  }
+
+  #star {
+    &-1 {
+      width: 50px;
+      right: 90px;
+    }
+
+    &-2 {
+      width: 30px;
+      left: 90px;
+    }
+  }
+
+  #confetti {
+    top: 400px;
+    width: 110%;
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  #baseline {
+    &-heading {
+      font-size: 2.3rem;
+    }
+
+    &-text {
+      font-size: 1rem;
+    }
+  }
+
+  #icon-completed {
+    width: auto;
+  }
 }

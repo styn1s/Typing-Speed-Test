@@ -20,6 +20,7 @@ const record = document.getElementById("record-info");
 const logo = document.getElementById("logo");
 const restartBtn = document.getElementById("restart-btn");
 const mobileInput = document.getElementById("mobile-input");
+const typingInfo = document.getElementById("typing-info");
 
 const firstDropdown = document.getElementById("dropdown-1");
 const secDropdown = document.getElementById("dropdown-2");
@@ -173,6 +174,7 @@ firstRadios.forEach((radio) => {
       .closest(".dropdown-item")
       .querySelector("span").textContent;
     firstDropHead.textContent = selectedLabel;
+    localStorage.setItem("level", selectedLabel.toLowerCase());
   });
 });
 
@@ -327,6 +329,7 @@ const onStartChange = () => {
   startDiv.style.display = "none";
   accuracySpan.classList.add("active");
   timeSpan.classList.add("active");
+  typingInfo.style.border = "none";
 };
 
 /**
