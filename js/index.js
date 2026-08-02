@@ -213,7 +213,7 @@ async function renderLevel(level) {
   try {
     const container = document.getElementById("content");
 
-    const res = await fetch("../assets/data.json");
+    const res = await fetch("assets/data.json");
     const data = await res.json();
 
     const text = getRandomText(level, data);
