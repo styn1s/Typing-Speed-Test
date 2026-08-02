@@ -65,15 +65,15 @@ document.addEventListener("keydown", (event) => {
     if (localStorage.getItem("highscore") == 0) {
       saveStats();
       testCompleted = true;
-      window.location.href = "/pages/baseline.html";
+      window.location.href = "pages/baseline.html";
     } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
       saveStats();
       testCompleted = true;
-      window.location.href = "/pages/completed.html";
+      window.location.href = "pages/completed.html";
     } else {
       saveStats();
       testCompleted = true;
-      window.location.href = "/pages/highscore.html";
+      window.location.href = "pages/highscore.html";
     }
 
     return;
@@ -103,15 +103,15 @@ mobileInput.addEventListener("input", (e) => {
     if (localStorage.getItem("highscore") == 0) {
       saveStats();
       testCompleted = true;
-      window.location.href = "/pages/baseline.html";
+      window.location.href = "pages/baseline.html";
     } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
       saveStats();
       testCompleted = true;
-      window.location.href = "/pages/completed.html";
+      window.location.href = "pages/completed.html";
     } else {
       saveStats();
       testCompleted = true;
-      window.location.href = "/pages/highscore.html";
+      window.location.href = "pages/highscore.html";
     }
 
     e.target.value = "";
@@ -213,7 +213,7 @@ async function renderLevel(level) {
   try {
     const container = document.getElementById("content");
 
-    const res = await fetch("/assets/data.json");
+    const res = await fetch("../assets/data.json");
     const data = await res.json();
 
     const text = getRandomText(level, data);
