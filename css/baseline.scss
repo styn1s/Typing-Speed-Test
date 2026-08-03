@@ -105,14 +105,14 @@
   top: 500px;
 }
 
-@media screen and (min-width: $breakpoint-xs) {
-  body {
+@media screen and (min-width: $breakpoint-xxs) {
+  html, body {
     height: 100%;
-    overflow: hidden;
+    position: relative;
+    overflow-x: hidden;
   }
 
   #main {
-    position: relative;
     width: 100%;
     margin-top: 60px;
   }
@@ -154,11 +154,11 @@
     &-1 {
       width: 30px;
       right: 30px;
-      padding-bottom: 40px;
     }
 
     &-2 {
       width: 20px;
+      top: 150px;
       left: 20px;
     }
   }
@@ -169,15 +169,15 @@
 
   #confetti {
     position: absolute;
-    top: 570px;
+    top: 675px;
     left: -35px;
     width: 700px;
   }
 }
 
-@media screen and (min-width: 530px) {
-  #main {
-    overflow: visible;
+@media screen and (min-width: $breakpoint-xs) {
+  html, body {
+    overflow-y: visible;
   }
 
   #stats-list {
@@ -188,17 +188,18 @@
   #star {
     &-1 {
       width: 50px;
+      top: 450px;
       right: 90px;
     }
 
     &-2 {
       width: 30px;
+      top: 200px;
       left: 90px;
     }
   }
 
   #confetti {
-    top: 400px;
     width: 110%;
   }
 }
