@@ -43,81 +43,13 @@ const secRadios = document.querySelectorAll('input[name="difficulty"]');
 
 document.addEventListener("keydown", (event) => {
   if (event.key.length > 1) return;
-
-  if (testCompleted) return;
-
-  const expectedLetter = textSymbols[currentIndex];
-  const pressedKey = event.key;
-  typedCount++;
-
-  if (expectedLetter !== pressedKey) {
-    mistakes.set(currentIndex, pressedKey);
-  } else {
-    correct++;
-  }
-
-  currentIndex++;
-  updateDisplay();
-
-  if (currentIndex === textSymbols.length) {
-    event.preventDefault();
-
-    if (localStorage.getItem("highscore") == 0) {
-      saveStats();
-      testCompleted = true;
-      window.location.href = "pages/baseline.html";
-    } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
-      saveStats();
-      testCompleted = true;
-      window.location.href = "pages/completed.html";
-    } else {
-      saveStats();
-      testCompleted = true;
-      window.location.href = "pages/highscore.html";
-    }
-
-    return;
-  }
+  handleInput(event.key);
 });
 
 mobileInput.addEventListener("input", (e) => {
-  if (testCompleted) return;
-
-  const expectedLetter = textSymbols[currentIndex];
-  const pressedKey = e.target.value.slice(-1); // Получаем последний введенный символ
-
-  typedCount++;
-
-  if (expectedLetter !== pressedKey) {
-    mistakes.set(currentIndex, pressedKey);
-  } else {
-    correct++;
-  }
-
-  currentIndex++;
-  updateDisplay();
-
-  if (currentIndex === textSymbols.length) {
-    event.preventDefault();
-
-    if (localStorage.getItem("highscore") == 0) {
-      saveStats();
-      testCompleted = true;
-      window.location.href = "pages/baseline.html";
-    } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
-      saveStats();
-      testCompleted = true;
-      window.location.href = "pages/completed.html";
-    } else {
-      saveStats();
-      testCompleted = true;
-      window.location.href = "pages/highscore.html";
-    }
-
-    e.target.value = "";
-
-    return;
-  }
+  const key = e.target.value.slice(-1);
+  handleInput(key);
+  e.target.value = "";
 });
 
 firstDropBtn.addEventListener("click", (e) => {
@@ -186,6 +118,58 @@ secRadios.forEach((radio) => {
     secDropHead.textContent = selectedLabel;
   });
 });
+
+/**
+ * Handles a key press event during a typing test.
+ *
+ * Validates the pressed key against the expected character,
+ * tracks correct keystrokes and mistakes, updates the current
+ * position, and triggers test completion logic when finished.
+ *
+ * @param {string} key - The key pressed by the user (from event.key).
+ * @returns {void}
+ */
+const handleInput = (key) => {
+  if (testCompleted) return;
+
+  const expectedLetter = textSymbols[currentIndex];
+  const pressedKey = event.key;
+  typedCount++;
+
+  if (expectedLetter !== pressedKey) {
+    mistakes.set(currentIndex, pressedKey);
+  } else {
+    correct++;
+  }
+
+  currentIndex++;
+  updateDisplay();
+
+  if (currentIndex === textSymbols.length) {
+    event.preventDefault();
+
+    if (localStorage.getItem("highscore") === 0) {
+      onTestComplete('baseline');
+    } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
+      onTestComplete('completed');
+    } else {
+      onTestComplete('highscore');
+    }
+
+    return;
+  }
+};
+
+/**
+ * Handles the completion of a test by saving statistics and navigating to the specified page.
+ *
+ * @param {string} page - The name of the page to navigate to (without the .html extension).
+ */
+const onTestComplete = (page) => {
+  saveStats();
+  testCompleted = true;
+  window.location.href = `pages/${page}.html`;
+}
 
 /**
  * Selects a random text object from the specified difficulty level.
@@ -409,4 +393,4 @@ const getDeviceType = () => {
   }
 
   return "desktop";
-}
+};
