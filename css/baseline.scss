@@ -71,7 +71,7 @@
 
 #restart-btn {
   display: flex;
-  margin-top: 30px;
+  white-space: nowrap;
   padding: 15px 20px;
   gap: 10px;
   text-decoration: none;
@@ -148,6 +148,7 @@
 
   #restart-btn {
     margin: 20px 0 100px;
+    z-index: 1;
   }
 
   #star {
@@ -161,10 +162,6 @@
       top: 150px;
       left: 20px;
     }
-  }
-
-  #restart-btn {
-    z-index: 1;
   }
 
   #confetti {

@@ -116,15 +116,6 @@
   border-color: hsl(210, 100%, 65%);
 }
 
-#mobile-input {
-  position: absolute;
-  opacity: 0;
-  height: 1px;
-  width: 1px;
-  pointer-events: none;
-  z-index: -1;
-}
-
 #content {
   margin: 0 90px;
   color: hsl(240, 1%, 59%);
@@ -292,6 +283,20 @@
   }
   .dropdown-arrow {
     width: 10px;
+  }
+  #mobile-input {
+    position: absolute;
+    top: 20%;
+    width: 75%;
+    height: 40%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    font-size: 4em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   #content {
     margin: 0 20px 30px;

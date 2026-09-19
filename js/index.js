@@ -37,19 +37,21 @@ const secRadios = document.querySelectorAll('input[name="difficulty"]');
   const highscore = localStorage.getItem("highscore");
   if (highscore === null) {
     localStorage.setItem("highscore", 0);
+    record.innerHTML = "0 WPM";
+  } else {
+    record.innerHTML = highscore + " WPM";
   }
-  record.innerHTML = highscore + " WPM";
 })();
 
 document.addEventListener("keydown", (event) => {
   if (event.key.length > 1) return;
+  if (document.activeElement === mobileInput) return;
   handleInput(event.key);
 });
 
 mobileInput.addEventListener("input", (e) => {
   const key = e.target.value.slice(-1);
   handleInput(key);
-  e.target.value = "";
 });
 
 firstDropBtn.addEventListener("click", (e) => {
@@ -133,7 +135,7 @@ const handleInput = (key) => {
   if (testCompleted) return;
 
   const expectedLetter = textSymbols[currentIndex];
-  const pressedKey = event.key;
+  const pressedKey = key;
   typedCount++;
 
   if (expectedLetter !== pressedKey) {
@@ -148,12 +150,12 @@ const handleInput = (key) => {
   if (currentIndex === textSymbols.length) {
     event.preventDefault();
 
-    if (localStorage.getItem("highscore") === 0) {
-      onTestComplete('baseline');
+    if (Number(localStorage.getItem("highscore")) === 0) {
+      onTestComplete("baseline");
     } else if (Number(wpmSpan.innerHTML) < localStorage.getItem("highscore")) {
-      onTestComplete('completed');
+      onTestComplete("completed");
     } else {
-      onTestComplete('highscore');
+      onTestComplete("highscore");
     }
 
     return;
@@ -169,7 +171,7 @@ const onTestComplete = (page) => {
   saveStats();
   testCompleted = true;
   window.location.href = `pages/${page}.html`;
-}
+};
 
 /**
  * Selects a random text object from the specified difficulty level.
