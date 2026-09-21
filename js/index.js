@@ -7,6 +7,8 @@ let correct = 0;
 let typedCount = 0;
 let mistakes = new Map();
 let textSymbols;
+let statsTimerId = null;
+let countdownTimerId = null;
 
 const levelLinks = document.querySelectorAll(".level-info__item a");
 const modeLinks = document.querySelectorAll(".mode-info__item a");
@@ -241,30 +243,44 @@ const startTest = () => {
     mobileInput.focus();
   }
 
-  setInterval(() => {
-    if (currentIndex === textSymbols.length) {
-      clearInterval();
-    } else {
-      updateStats();
-    }
-  }, 1000);
+  startStatsTimer();
 };
+
+/**
+ * Starts a one-second interval that periodically updates the test statistics.
+ * Does nothing if the timer is already running. Stops automatically when the text ends.
+ * @returns {void}
+ */
+const startStatsTimer = () => {
+  if (statsTimerId) return;
+
+  statsTimerId = setInterval(() => {
+    if (currentIndex >= textSymbols.length) {
+      clearInterval(statsTimerId);
+      statsTimerId = null;
+      return;
+    }
+    updateStats();
+  }, 1000);
+}
 
 /**
  * Starts a 60-second countdown timer and updates the display every second.
  * @returns {void}
  */
 const updateTimer = () => {
-  let seconds = 59;
+  if (countdownTimerId) clearInterval(countdownTimerId);
+
+  let seconds = 60;
   const timeSpan = document.getElementById("time");
 
-  setInterval(() => {
-    if (seconds >= 0) {
-      const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-      timeSpan.innerHTML = `00:${formattedSeconds}`;
+  countdownTimerId = setInterval(() => {
+    if (seconds > 0) {
       seconds--;
+      timeSpan.innerHTML = `00:${seconds < 10 ? "0" + seconds : seconds}`;
     } else {
-      clearInterval();
+      clearInterval(countdownTimerId);
+      countdownTimerId = null;
     }
   }, 1000);
 };
@@ -378,18 +394,20 @@ const restartTest = () => {
   typedCount = 0;
   mistakes.clear();
   startTime = Temporal.Now.plainTimeISO();
-  renderLevel(localStorage.getItem("level"));
+  updateTimer();
+
+  renderLevel(localStorage.getItem("level")).then(() => {
+    updateDisplay();
+  });
 };
 
 const getDeviceType = () => {
   const ua = navigator.userAgent;
 
-  // Проверка на планшет
   if (/Tablet|iPad/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua))) {
     return "tablet";
   }
 
-  // Проверка на мобильное устройство
   if (/Mobi|Android|iPhone|iPod|BlackBerry|Windows Phone/i.test(ua)) {
     return "mobile";
   }
